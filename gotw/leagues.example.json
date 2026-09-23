@@ -1,0 +1,14 @@
+{
+  "_comment": "Copy to leagues.json and add one entry per league you follow. leagues.json is git-ignored.",
+  "_comment_2": "site = the league's statsplus base URL (no /reports suffix). league_id = the NNN in league_NNN_home.html for the top level. org = your own club, for --team mine. aliases = other slugs that map to this entry.",
+  "sdmb": {
+    "site": "https://statsplus.net/sdmbootp/",
+    "league_id": 100,
+    "org": "Your Team Name"
+  },
+  "bwb": {
+    "site": "https://atl-02.statsplus.net/bwb/",
+    "league_id": 203,
+    "aliases": ["bbl"]
+  }
+}

@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Personal config (copy the *.example.json next to it)
+leagues.json
+
+# Generated reports, archived games and the raw-HTML cache
+gamedata/
+
+# Editors / OS
+.vscode/
+.idea/
+.obsidian/
+.DS_Store
+Thumbs.db
