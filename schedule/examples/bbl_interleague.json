@@ -1,0 +1,160 @@
+{
+  "league_name": "Bushwood Baseball League",
+  "league_abbr": "BBL",
+  "games_per_team": 162,
+  "inter_league": true,
+  "balanced_games": false,
+  "default_game_time": "1905",
+  "sunday_game_time": "1335",
+  "calendar": {
+    "start_month": 4,
+    "start_day": 6,
+    "start_day_of_week": 2,
+    "season_days": 186,
+    "allstar_game_day": 100,
+    "allstar_break_days": [
+      99,
+      100,
+      101,
+      102
+    ]
+  },
+  "subleagues": [
+    {
+      "name": "Ty Webb League",
+      "games_vs_division_rival": 18,
+      "games_vs_cross_division": 12,
+      "interleague_games": 30,
+      "divisions": [
+        {
+          "name": "The Links Division",
+          "teams": [
+            {
+              "city": "Anchorage",
+              "nickname": "Otters",
+              "statsplus_id": 21
+            },
+            {
+              "city": "Bruges",
+              "nickname": "Trappists",
+              "statsplus_id": 11
+            },
+            {
+              "city": "Montana",
+              "nickname": "Pitmasters",
+              "statsplus_id": 8
+            },
+            {
+              "city": "Owen Sound",
+              "nickname": "Jets",
+              "statsplus_id": 5
+            },
+            {
+              "city": "Traverse City",
+              "nickname": "Little Green Men",
+              "statsplus_id": 2
+            }
+          ]
+        },
+        {
+          "name": "The Valley Division",
+          "teams": [
+            {
+              "city": "Greenville",
+              "nickname": "Grits",
+              "statsplus_id": 27
+            },
+            {
+              "city": "Manhattan",
+              "nickname": "Mobsters",
+              "statsplus_id": 6
+            },
+            {
+              "city": "Pittsburgh",
+              "nickname": "Penguins",
+              "statsplus_id": 28
+            },
+            {
+              "city": "Taipei",
+              "nickname": "Golden Dragons",
+              "statsplus_id": 17
+            },
+            {
+              "city": "Vancouver",
+              "nickname": "Mounties",
+              "statsplus_id": 14
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Al Czervik League",
+      "games_vs_division_rival": 18,
+      "games_vs_cross_division": 12,
+      "interleague_games": 30,
+      "divisions": [
+        {
+          "name": "The Crest Division",
+          "teams": [
+            {
+              "city": "Chihuahua",
+              "nickname": "Guerreros",
+              "statsplus_id": 15
+            },
+            {
+              "city": "Fremont Street",
+              "nickname": "Heffalumps",
+              "statsplus_id": 7
+            },
+            {
+              "city": "Havana",
+              "nickname": "Sugar Kings",
+              "statsplus_id": 9
+            },
+            {
+              "city": "San Juan",
+              "nickname": "Senators",
+              "statsplus_id": 20
+            },
+            {
+              "city": "Savannah",
+              "nickname": "Bananas",
+              "statsplus_id": 19
+            }
+          ]
+        },
+        {
+          "name": "The Oaks Division",
+          "teams": [
+            {
+              "city": "Fresno",
+              "nickname": "Pharaohs",
+              "statsplus_id": 1
+            },
+            {
+              "city": "Omaha",
+              "nickname": "Bombers",
+              "statsplus_id": 3
+            },
+            {
+              "city": "Portland",
+              "nickname": "Frogs",
+              "statsplus_id": 12
+            },
+            {
+              "city": "Provo",
+              "nickname": "Buzz Bullets",
+              "statsplus_id": 25
+            },
+            {
+              "city": "Sacramento",
+              "nickname": "High Rollers",
+              "statsplus_id": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

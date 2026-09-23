@@ -16,3 +16,7 @@ gamedata/
 .obsidian/
 .DS_Store
 Thumbs.db
+
+# Generated schedules (schedule/)
+*.lsdl
+*_blocks_*.csv

@@ -9,13 +9,14 @@ Tools for running and following leagues in
 OOTP can simulate a whole season in an afternoon and records everything, but
 it doesn't tell you what was worth paying attention to. Commissioners and
 players in online leagues end up doing that by hand, like picking the game
-of the week, keeping track of records, or writing recaps.
+of the week, keeping track of records, or writing recaps. And some league
+setups need things OOTP doesn't build in, like a custom schedule.
 
 The tools here are for that work. They:
 
-- **Work from what the league publishes.** Most tools read the HTML reports
-  OOTP uploads to statsplus, so anyone in a league can run them, not just the
-  commissioner with the league file.
+- **Work from what the league publishes.** Where they can, tools read the
+  HTML reports OOTP uploads to statsplus, so anyone in a league can run them,
+  not just the commissioner with the league file.
 - **Write plain Markdown.** Reports can be read anywhere, pasted into a
   league forum or Discord, kept in git, or opened as an
   [Obsidian](https://obsidian.md) vault.
@@ -29,6 +30,7 @@ The tools here are for that work. They:
 | Tool | What it does |
 | --- | --- |
 | [gotw](gotw/) | **Commissioner's Game of the Week.** Scores every game in a window of sim-days on a Watchability Index (closeness, lead changes, comebacks, clutch hits, star performances, no-hitters and other rare events) and writes a report crowning the Game of the Week and the Players of the Week. It can also score real-life games. |
+| [schedule](schedule/) | **Custom league schedules.** Builds a 162-game schedule from a league config and writes an `.lsdl` file OOTP can import, for league setups OOTP's built-in schedules don't cover. Every schedule is checked (games, home/away split, off days, no back-to-back repeat opponents) before it's written. |
 
 More tools will be added over time.
 
