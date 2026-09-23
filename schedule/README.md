@@ -132,6 +132,44 @@ The code also handles a 6+6 vs 5+5 interleague league (13 / 12 / 25 and
 written. Supporting them means working out new series patterns, which the
 module docstring in `ootp_schedule.py` describes.
 
+## Making a schedule for your league
+
+1. **Check the shape fits.** Your league needs two subleagues, each split
+   into two equal divisions of 5 or 6 teams, and a 162-game season. See
+   *What it supports* above.
+2. **Copy an example config.** Start from `examples/bbl_interleague.json`
+   if your subleagues play each other, or `examples/bbl_no_interleague.json`
+   if they don't. Save it under any name, such as `my_league.json`.
+3. **Enter your teams.** Replace the subleague, division and team names.
+   List subleagues and divisions in the same order as in your OOTP league,
+   because that order decides the team numbers in the file. The order of
+   teams within a division doesn't matter, since they're sorted by city.
+4. **Set the game counts** to a tested combination from the table above.
+   The counts for each subleague must add up to 162: games against division
+   rivals × (division size − 1), plus cross-division games × division size,
+   plus interleague games.
+5. **Set the calendar.**
+   - `start_month`, `start_day` and `start_day_of_week` are your opening
+     day. It must be a Monday or a Thursday.
+   - Keep `season_days` at 186. That's the length that gives 52 blocks.
+   - `allstar_break_days` must be the four days of one Monday–Thursday week,
+     counted from opening day as day 1, and `allstar_game_day` is one of
+     them. The examples use days 110–113 (Thursday opener) and 99–102
+     (Monday opener), which both fall in mid-July.
+   - `default_game_time` and `sunday_game_time` are `HHMM` start times.
+6. **Run it** and look for `Validation: PASS`. A note about homestands or
+   road trips longer than 3 series is a soft target, not a failure.
+7. **Read the CSV** to check each team's season. If you don't like a
+   schedule, run again with a different `--seed`; each seed gives a
+   different, valid schedule. Keep a note of the seed you use so you can
+   make the same file again.
+8. **Import the `.lsdl`** as described in *Importing into OOTP*.
+
+Supporting other division sizes or game counts means changing the code: the
+series patterns (`build_pair_shapes` and `build_pair_shapes_inter`) and how
+matchups are grouped into blocks (`rounds_even` and `rounds_odd`). The
+module docstring explains the math behind the current ones.
+
 ## Tests
 
 ```sh

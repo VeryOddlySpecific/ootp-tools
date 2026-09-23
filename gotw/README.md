@@ -122,6 +122,85 @@ the scoring plays from any play-by-play source, such as
 [Retrosheet](https://www.retrosheet.org). The file's docstring explains the
 format.
 
+## Customizing
+
+### Your leagues
+
+Everything league-specific lives in `leagues.json`, which is git-ignored, so
+pulling updates never overwrites it. Add one entry per league, using any
+short slug you like as its key. The slug is what you pass to `--league` and
+what the output folders are named after. You can follow several leagues
+from one install, and each gets its own folder under `gamedata/`.
+
+To find the values for a league:
+
+- **`site`**: open any page of the league's statsplus reports. The URL looks
+  like `https://statsplus.net/<name>/reports/news/html/...`. Everything
+  before `/reports` is the site.
+- **`league_id`**: open the league's home page in those reports. The file is
+  named `league_<id>_home.html`. This is usually 100 for the top league. If
+  your league has minor leagues, use the top league's id.
+- **`org`**: the full team name as it appears in box scores, like
+  `San Diego Groot`.
+
+The tool needs OOTP's standard HTML report layout (`reports/news/html/`
+with `box_scores/` and `game_logs/`). A league that uploads its reports
+somewhere other than statsplus should work with `--site` if it keeps that
+layout.
+
+### How games are scored
+
+All the point values are in the `WEIGHTS` dict near the top of
+`ootp_gotw.py`, grouped by component, with a comment on each. For example:
+
+- To value late-inning drama more, raise `lead_change_very_late` and
+  `walkoff`, or raise `swing_cap` so dramatic games can separate from each
+  other.
+- To make an individual performance count more, raise `star_cap` and the
+  `star_*` values.
+- To make no-hitters less decisive, lower `no_hitter` and `perfect_game`.
+
+[SCORING.md](SCORING.md) explains what each value does. After changing any
+of them, run the tests: the golden tests will show how the two real games'
+scores moved. Update the expected numbers in `tests/test_gotw.py` if the
+change is what you meant.
+
+### How players are ranked
+
+The Players of the Week ranking uses `PLAYER_WEIGHTS`, just below
+`WEIGHTS`. Batters earn points for total bases, RBI, runs, walks and homers,
+minus a small amount per out. Pitchers earn points for innings and
+strikeouts and lose them for earned runs, walks and hits. Starters also gain
+or lose a little depending on how far their Game Score was above or below
+50. The comment in the code explains the
+balance between hitters and pitchers, which is worth keeping in mind before
+changing it.
+
+### The report
+
+The report is built in `write_report()` in `ootp_gotw.py`. Things you might
+want to change there:
+
+- **The title.** "Commissioner's Game of the Week" is the heading for a
+  league-wide report.
+- **How many honourable mentions** are listed (`games[1:min(len(games), 4)]`,
+  so three).
+- **Obsidian links.** The report links to other files with `[[wikilinks]]`,
+  which show up as plain text outside Obsidian. Remove the lines that build
+  them if you don't use Obsidian.
+
+Other defaults: turning points are picked by `turning_points()` (three per
+game), and the console marks games scoring 45 or more with `!` (in
+`main()`). The defaults for window length, player rows and archiving are
+command-line options, so you can change them per run instead of in the
+code.
+
+### Adding real games
+
+Add a `Game(...)` entry to `GAMES` in `historical.py` (see its docstring).
+If you add a test for it like the two in `tests/test_gotw.py`, it becomes
+another fixed point for checking changes to the weights.
+
 ## How it finds games
 
 statsplus has no list of games, so the tool works it out:

@@ -48,16 +48,43 @@ python ootp_gotw.py --league <your-league-slug>
 
 Each tool's README covers its setup and options in full.
 
+## Using it for your own league
+
+The tools are written for any OOTP league, but the repo ships with examples
+from the leagues I play in. To make them yours:
+
+1. **Clone it, or fork it** if you plan to change the code and want to keep
+   your changes on GitHub.
+2. **Point each tool at your league.** Every tool has an example config to
+   copy. Your own copies are yours to edit, and some are git-ignored, so
+   pulling updates won't overwrite them.
+
+   | Tool | Copy | Then set |
+   | --- | --- | --- |
+   | gotw | `gotw/leagues.example.json` → `gotw/leagues.json` | Your league's statsplus URL, and your team for `--team mine` |
+   | schedule | `schedule/examples/bbl_interleague.json` → a new file for your league | Your teams, divisions, game counts and opening day |
+
+3. **Tune it to taste.** The settings people most often want to change are
+   near the top of each script, such as the point values gotw uses to score
+   games. Each tool's README has a *Customizing* section listing what's safe
+   to change and where it is.
+4. **Run the tests after changing code** (`python -m unittest discover
+   tests` in the tool's folder). Some tests pin exact results, like the
+   scores of real games in gotw, so a deliberate change can fail them. If
+   the new numbers are what you intended, update the expected values in the
+   test.
+
 ## Repository layout
 
 ```
 ootp-tools/
-├── README.md          this file
-└── <tool>/            one folder per tool
-    ├── README.md      how to use it
-    ├── *.py           the tool
-    ├── requirements.txt
-    └── tests/         run with: python -m unittest discover tests
+├── README.md             this file
+└── <tool>/               one folder per tool
+    ├── README.md         how to use and customize it
+    ├── *.py              the tool
+    ├── *.example.json    config to copy (or examples/)
+    ├── requirements.txt  if it needs packages beyond the standard library
+    └── tests/            run with: python -m unittest discover tests
 ```
 
 Every tool stands on its own, with its own dependencies, config and tests,
