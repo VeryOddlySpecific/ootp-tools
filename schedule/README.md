@@ -132,7 +132,12 @@ The code also handles a 6+6 vs 5+5 interleague league (13 / 12 / 25 and
 written. Supporting them means working out new series patterns, which the
 module docstring in `ootp_schedule.py` describes.
 
-## Making a schedule for your league
+## Customizing
+
+### Making a schedule for your league
+
+Everything about your league goes in its config file. You don't need to
+change the code.
 
 1. **Check the shape fits.** Your league needs two subleagues, each split
    into two equal divisions of 5 or 6 teams, and a 162-game season. See
@@ -164,6 +169,24 @@ module docstring in `ootp_schedule.py` describes.
    different, valid schedule. Keep a note of the seed you use so you can
    make the same file again.
 8. **Import the `.lsdl`** as described in *Importing into OOTP*.
+
+### Tuning the generator
+
+These settings are in `ootp_schedule.py`:
+
+| Setting | Where | Default | What it does |
+| --- | --- | --- | --- |
+| Longest homestand or road trip | `max_run` in `optimize_venues()` | 3 series | The tool tries to keep teams from playing more than this many series in a row at home or away. It's a soft target: runs that can't be fixed are reported, not treated as failures. Lower it for more alternation; the tool may then report more runs it couldn't fix. |
+| Game days within a block | `series_days()` | See below | Which days of a Monday–Thursday block each series length uses. Currently 4-game series use all four days, 3-game series skip Monday, and 2-game series play Tuesday–Wednesday. |
+| Default start times | `write_lsdl()` | 1905, and 1335 on Sundays | Only used when the config leaves out `default_game_time` or `sunday_game_time`. Setting them in the config is easier. |
+| Default seed | `--seed` in `main()` | 20260326 | The seed used when you don't pass `--seed`. |
+| Search effort | `restarts` and `iters` in `sequence_rounds()`, `restarts` in `decompose_typed()` | 80 / 20,000 and 400 | How hard the tool tries before giving up. If a run fails with "try a different --seed", a new seed is usually quicker than raising these. |
+
+The validation checks run on every schedule whatever you change, so an edit
+that breaks a rule, such as a team playing twice in one day, stops the run
+instead of writing a bad file. Run the tests after changing the code.
+
+### Other league shapes
 
 Supporting other division sizes or game counts means changing the code: the
 series patterns (`build_pair_shapes` and `build_pair_shapes_inter`) and how
